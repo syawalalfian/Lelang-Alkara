@@ -4,11 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\barang;
 
 
 class LoginController extends Controller
 {
     //
+    public function home(){
+
+        $barangs = Barang::all();
+        // dd($barangs);
+        return view('welcome', compact('barangs'));
+
+    }
+
+
      public function view()
     {
         return view('auth.login');
@@ -44,6 +54,6 @@ if (Auth::attempt($user))
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect ('/login');
+        return redirect ('/');
     }
 }

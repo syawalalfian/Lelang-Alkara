@@ -23,4 +23,5 @@ class dashboard extends Controller
         return view('dashboard.masyarakat');
     }
     
+    
 }

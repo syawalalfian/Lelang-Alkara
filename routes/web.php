@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\LelangController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\dashboard;
 /*
@@ -16,11 +17,13 @@ use App\Http\Controllers\dashboard;
 |
 */
 
-Route::get('/', function () {
-    return view('template.main');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
+
+Route::get('/', [LoginController::class, 'home'])->name('home');
 Route::get('login', [LoginController::class, 'view'])->name('login')->middleware('guest');
 Route::post('login', [LoginController::class, 'proses'])->name('login.proses')->middleware('guest');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout.petugas');
@@ -44,6 +47,17 @@ Route::get('/dashboard/masyarakat', [dashboard::class, 'masyarakat'])->name('das
         Route::get('barang/{barang}/edit', 'edit')->name('barang.edit');
         Route::put('barang/{barang}', 'update')->name('barang.update');
         Route::delete('barang/{barang}', 'destroy')->name('barang.destroy');
+    });
+
+ Route::controller(LelangController::class)->group(function() {
+        Route::get('lelang', 'index')->name('lelang.index');
+        Route::get('lelang/create', 'create')->name('lelang.create');
+        Route::post('lelang', 'store')->name('lelang.store');
+        Route::get('lelang/{lelang}', 'show')->name('lelang.show');
+        Route::get('lelang/{lelang}/edit', 'edit')->name('lelang.edit');
+        Route::put('lelang/{lelang}', 'update')->name('lelang.update');
+        Route::delete('lelang/{lelang}', 'destroy')->name('lelang.destroy');
+
     });
 
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Barang;
 
 class lelang extends Model
 {
@@ -16,4 +17,9 @@ class lelang extends Model
         'tanggal_lelang',
         'status'
     ];
+
+     public function lelang()
+    {
+        return $this->belongsTo(Lelang::class);
+    }
 }

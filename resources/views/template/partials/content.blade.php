@@ -1,5 +1,3 @@
-<div class="content">
-                <div class="container-fluid">
-                        @yield('content')
-                </div>
-            </div>
+ <div class="container-fluid" id="container-wrapper">
+@yield('content')
+</div>
