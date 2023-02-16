@@ -18,8 +18,9 @@ class lelang extends Model
         'status'
     ];
 
-     public function lelang()
+     public function barang()
     {
-        return $this->belongsTo(Lelang::class);
+        return $this->hasOne('App\Models\Barang', 
+        'id', 'barangs_id');
     }
 }

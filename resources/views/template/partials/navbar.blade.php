@@ -158,19 +158,19 @@
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
 
-                {{-- @if(auth()->user()->level == 'admin') --}}
+                @if(auth()->user()->level == 'admin')
                 <img class="img-profile rounded-circle" src="{{asset('assets/img/kingmasbro.jpeg')}}" style="max-width: 60px">
-                {{-- @else --}}
-                {{-- <img class="img-profile rounded-circle" src="{{asset('assets/img/boy.png')}}" style="max-width: 60px"> --}}
-                {{-- @endif --}}
+                @else
+                <img class="img-profile rounded-circle" src="{{asset('assets/img/boy.png')}}" style="max-width: 60px"> 
+                @endif
 
-                {{-- @if(auth()->user()->level == 'admin')
+                @if(auth()->user()->level == 'admin')
                 <span class="ml-2 d-none d-lg-inline text-white small">Admin</span>
                 @elseif(auth()->user()->level == 'petugas')
                 <span class="ml-2 d-none d-lg-inline text-white small">Petugas</span>
-                @else(auth()->user()->level == 'masyarakat') --}}
+                @else(auth()->user()->level == 'masyarakat')
                 <span class="ml-2 d-none d-lg-inline text-white small">Masyarakat</span>
-                {{-- @endif --}}
+                @endif
 
               </a>
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

@@ -2,56 +2,103 @@
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
         <div class="sidebar-brand-text mx-3">Lelang Alkara</div>
       </a>
-      <hr class="sidebar-divider my-0">
+      
+      
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        @if(auth()->user()->level == 'admin')
+        <a class="nav-link" href="{{route('dashboard.admin')}}">
+          @elseif(auth()->user()->level == 'petugas')
+          <a class="nav-link" href="{{route('dashboard.petugas')}}">
+          @else(auth()->user()->level == 'masyarakat')
+            <a class="nav-link" href="{{route('dashboard.masyarakat')}}">
+          @endif
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
+      
+      
+      @if(auth()->user()->level == 'admin')
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
-        Features
+        Data Pengguna
       </div>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-          aria-expanded="true" aria-controls="collapseBootstrap">
-          <i class="far fa-fw fa-window-maximize"></i>
-          <span>Bootstrap UI</span>
-        </a>
-        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Bootstrap UI</h6>
-            <a class="collapse-item" href="alerts.html">Alerts</a>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-            <a class="collapse-item" href="modals.html">Modals</a>
-            <a class="collapse-item" href="popovers.html">Popovers</a>
-            <a class="collapse-item" href="progress-bar.html">Progress Bars</a>
-          </div>
-        </div>
+        <a class="nav-link" href="index.html">
+         <i class="fas fa-fw fa-user"></i>
+          <span>Data Petugas</span></a>
       </li>
+      @endif
       
+      @if(auth()->user()->level == 'admin') 
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
-        Examples
+        Data Barang
       </div>
-      <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
-          aria-controls="collapsePage">
-          <i class="fas fa-fw fa-columns"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePage" class="collapse show" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Example Pages</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item active" href="blank.html">Blank Page</a>
-          </div>
-        </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('barang.index')}}">
+         <i class="fas fa-fw fa-box"></i>
+          <span>Data Barang</span></a>
       </li>
-      
+      @elseif(auth()->user()->level == 'petugas')
       <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+        Data Barang
+      </div>
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('barang.index')}}">
+         <i class="fas fa-fw fa-box"></i>
+          <span>Data Barang</span></a>
+      </li>
+      @endif
+
+      @if(auth()->user()->level == 'petugas')
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+              Data Lelang
+            </div>
+            <li class="nav-item">
+              <a class="nav-link" href="{{route('lelang.index')}}">
+              <i class="fas fa-fw fa-file"></i>
+                <span>Data Lelang</span></a>
+            </li>
+            @endif
+
+      @if(auth()->user()->level == 'admin')
+      <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+              Data Laporan
+            </div>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+              <i class="fas fa-fw fa-file"></i>
+                <span>Laporan</span></a>
+            </li>
+       @elseif(auth()->user()->level == 'petugas')
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+              Data Laporan
+            </div>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+              <i class="fas fa-fw fa-file"></i>
+                <span>Laporan</span></a>
+            </li>
+      @endif
+
+@if(auth()->user()->level == 'masyarakat')
+      <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+              Data Lelang
+            </div>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">
+              <i class="fas fa-fw fa-file"></i>
+                <span>Data Penawaran Anda</span></a>
+            </li>
+            @endif
+
+      
+
+      
       
     </ul>

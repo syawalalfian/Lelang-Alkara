@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
 use App\Models\Lelang;
 
 class barang extends Model
@@ -13,8 +12,8 @@ class barang extends Model
     protected $table = 'barangs';
     protected $fillable = [ 'nama_barang','tanggal','harga_awal','deskripsi', 'image','created_at','updated_at'];
     
-    public function barang()
+    public function lelang()
     {
-        return $this->hasOne('App\Models\Barang', 'id', 'barangs_id');
+        return $this->belongsTo(Lelang::class);
     }
 }

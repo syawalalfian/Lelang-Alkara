@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\barang;
+use App\Models\lelang;
 
 class dashboard extends Controller
 {
@@ -18,9 +20,12 @@ class dashboard extends Controller
     
     }
 
-    public function masyarakat()
-    {
-        return view('dashboard.masyarakat');
+    public function masyarakat(barang $barangs)
+    {   
+        // dd ($barangs);
+        $barangs = barang::all();
+        $lelangs = lelang::all();
+        return view('dashboard.masyarakat', compact('lelangs'));
     }
     
     

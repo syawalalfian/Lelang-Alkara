@@ -8,7 +8,7 @@
 
 @section('content')
  <div class="d-sm-flex align-items-center justify-content-between mb-4 col-md-12">
-            <h1 class="h3 mb-0 text-gray-800">Data Barang</h1>
+            <h1 class="h3 mb-0 text-gray-800">Data Barang Lelang</h1>
             <a href="{{route('lelang.create')}}" class="btn btn-success ">
                 <i class="fa fa-plus md-2 pr-1" aria-hidden="true"></i>Tambah
              </a>
@@ -30,18 +30,16 @@
                       </tr>
                     </thead>
                     <tbody>
-                        @forelse ($lelangs as $item)
+                        @forelse ($lelangs as $lelang)
                          <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td></td>
+                            <td>{{$lelang->barang->nama_barang}}</td>
+                            <td>{{$lelang->barang->harga_awal}}</td>
+                            <td>{{ $lelang->harga_akhir}}</td>
+                            <td>{{ \Carbon\Carbon::parse($lelang->tanggal)->format('j-F-Y') }}</td>
+                            <td><span class="badge {{ $lelang->status == 'ditutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span></td>
                             <td>
-                             
-                            </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <form action="" method="POST">
+                                <form action="{{route('lelang.destroy', $lelang->barang->id)}}" method="POST">
                                 <a href="" class="btn btn-info btn-sm">
                                 <i class="bi bi-info-square"></i>Show
                                 </a>
@@ -80,3 +78,4 @@
     });
   </script>
 @endpush
+

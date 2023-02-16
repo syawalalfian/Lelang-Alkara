@@ -139,7 +139,7 @@
                   <div class="card">
                     <div class="container">
                       @if($barang->image)
-                            <img src="{{asset('Storage/'.$barang->image)}}" alt="" style="width:100%;height:400px" >
+                            <img src="{{asset('Storage/'.$barang->image)}}" alt="" style="width:100%" >
                       @endif 
                  
                     <h4>

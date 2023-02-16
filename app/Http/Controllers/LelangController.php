@@ -34,7 +34,7 @@ class LelangController extends Controller
                     {
                         $query->select('barangs_id')->from('lelangs');
                     })->get();
-        return view ('lelang.create', compact('barangs'));
+        return view('lelang.create', compact('barangs'));
     }
 
     /**
@@ -116,5 +116,7 @@ class LelangController extends Controller
     public function destroy(lelang $lelang)
     {
         //
+        $lelangs = Lelang::select('id','barangs_id','tanggal_lelang','harga_akhir','status')->get();
+        return view('listlelang.index', compact('lelangs'));
     }
 }

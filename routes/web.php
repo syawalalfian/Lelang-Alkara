@@ -34,11 +34,10 @@ Route::post('register', [RegisterController::class, 'store'])->name('register.st
 
 Route::view('error403', 'error.error403')->name('error.403');
 
-
-Route::get('/dashboard/admin', [dashboard::class, 'admin'])->name('dashboard.admin')->middleware(['auth', 'level:admin']);
-Route::get('/dashboard/petugas', [dashboard::class, 'petugas'])->name('dashboard.petugas')->middleware(['auth', 'level:petugas,admin']);
 Route::get('/dashboard/masyarakat', [dashboard::class, 'masyarakat'])->name('dashboard.masyarakat')->middleware(['auth', 'level:masyarakat']);
 
+Route::middleware(['auth', 'level:admin,petugas'])->group(function () {
+   Route::get('/dashboard/admin', [dashboard::class, 'admin'])->name('dashboard.admin');
  Route::controller(BarangController::class)->group(function() {
         Route::get('barang', 'index')->name('barang.index');
         Route::get('barang/create', 'create')->name('barang.create');
@@ -47,9 +46,13 @@ Route::get('/dashboard/masyarakat', [dashboard::class, 'masyarakat'])->name('das
         Route::get('barang/{barang}/edit', 'edit')->name('barang.edit');
         Route::put('barang/{barang}', 'update')->name('barang.update');
         Route::delete('barang/{barang}', 'destroy')->name('barang.destroy');
+        });
     });
 
- Route::controller(LelangController::class)->group(function() {
+    
+Route::middleware(['auth', 'level:petugas'])->group(function () {
+Route::get('/dashboard/petugas', [dashboard::class, 'petugas'])->name('dashboard.petugas');
+Route::controller(LelangController::class)->group(function() {
         Route::get('lelang', 'index')->name('lelang.index');
         Route::get('lelang/create', 'create')->name('lelang.create');
         Route::post('lelang', 'store')->name('lelang.store');
@@ -58,6 +61,7 @@ Route::get('/dashboard/masyarakat', [dashboard::class, 'masyarakat'])->name('das
         Route::put('lelang/{lelang}', 'update')->name('lelang.update');
         Route::delete('lelang/{lelang}', 'destroy')->name('lelang.destroy');
 
+        });
     });
 
 
