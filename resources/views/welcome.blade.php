@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Lelang Alkara</title>
+  <title>Lelang Online</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -42,7 +42,7 @@
     <div class="container d-flex justify-content-between">
 
       <div class="logo">
-        <h1><a href="index.html"><span>Lelang</span>Alkara</a></h1>
+        <h1><a href="index.html"><span>Lelang</span>Online</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -50,8 +50,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="#services">Dashboard </a></li>
           <li><a class="nav-link scrollto" href="{{route('login')}}">Login</a></li>
           <li><a class="nav-link scrollto" href="{{route('register')}}">Register</a></li>
         </ul>
@@ -73,9 +72,9 @@
           <div class="carousel-item active" style="background-image: url(assetss/img/hero-carousel/1.jpg)">
             <div class="carousel-container">
               <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">Waduhh </h2>
-                <p class="animate__animated animate__fadeInUp">Kenapa Tuh Kira-Kira</p>
-                <a href="{{route('barang.index')}}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                <h2 class="animate__animated animate__fadeInDown">Tempat Informasi Lelang Terbaik </h2>
+                <p class="animate__animated animate__fadeInUp">Mempermudah Proses Lelang Secara Aman dan Mudah</p>
+                <a href="{{route('dashboard.masyarakat')}}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
               </div>
             </div>
           </div>
@@ -83,9 +82,9 @@
           <div class="carousel-item" style="background-image: url(assetss/img/hero-carousel/2.jpg)">
             <div class="carousel-container">
               <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">Mau Lelang?</h2>
-                <p class="animate__animated animate__fadeInUp">Pake Nanya </p>
-                <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
+                <h2 class="animate__animated animate__fadeInDown">Barang Lelang Yang Berkualitas</h2>
+                <p class="animate__animated animate__fadeInUp">Memberikan Kualitas Yang Terbaik</p>
+                <a href="{{route('dashboard.masyarakat')}}" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
               </div>
             </div>
           </div>
@@ -93,8 +92,8 @@
           <div class="carousel-item" style="background-image: url(assetss/img/hero-carousel/3.jpg)">
             <div class="carousel-container">
               <div class="container">
-                <h2 class="animate__animated animate__fadeInDown">SUIIIII</h2>
-                <p class="animate__animated animate__fadeInUp">Ronaldo SUIII</p>
+                <h2 class="animate__animated animate__fadeInDown">Pelayanan Yang Cepat</h2>
+                <p class="animate__animated animate__fadeInUp">Tidak Ada Keraguan Dalam Pelayanan</p>
                 <a href="#about" class="btn-get-started scrollto animate__animated animate__fadeInUp">Get Started</a>
               </div>
             </div>
@@ -133,20 +132,20 @@
             <div class="row">
 
               <!-- Start Left Blog -->
-              @foreach ($barangs as $barang)
+              @foreach ($lelangs as $lelang)
                   <div class="col-md-4 col-sm-4 col-xs-12">
                 <div class="single-blog">
                   <div class="card">
                     <div class="container">
-                      @if($barang->image)
-                            <img src="{{asset('Storage/'.$barang->image)}}" alt="" style="width:100%" >
+                      @if($lelang->barang->image)
+                            <img src="{{asset('Storage/'.$lelang->barang->image)}}" alt="" style="width:100%" >
                       @endif 
                  
                     <h4>
-                      <a href="blog.html">{{$barang->nama_barang}}</a>
+                      <a href="blog.html">{{$lelang->barang->nama_barang}}</a>
                     </h4>
                     <p>
-                     {{$barang->deskripsi}}
+                     {{$lelang->barang->deskripsi}}
                     </p>
                     </div>
                    </div>
@@ -199,7 +198,7 @@
                   <i class="bi bi-phone"></i>
                   <p>
                     Call: +1 5589 55488 55<br>
-                    <span>Monday-Friday (9am-5pm)</span>
+                    <span>Senin-Jumat (9am-5pm)</span>
                   </p>
                 </div>
               </div>
@@ -210,8 +209,8 @@
                 <div class="single-icon">
                   <i class="bi bi-envelope"></i>
                   <p>
-                    WANJENG@GMAIL.COM<br>
-                    <span>xnxx.com</span>
+                   LELANGONLINE@GMAIL.COM<br>
+                    <span>lelangonline.com</span>
                   </p>
                 </div>
               </div>
@@ -222,8 +221,8 @@
                 <div class="single-icon">
                   <i class="bi bi-geo-alt"></i>
                   <p>
-                    SEER<br>
-                    <span>Deket REL</span>
+                    SMKN 1 KARAWANG<br>
+                    <span>Karawang, Jawa Barat</span>
                   </p>
                 </div>
               </div>
@@ -280,7 +279,7 @@
           <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="copyright text-center">
               <p>
-                &copy; Copyright <strong>eBusiness</strong>. All Rights Reserved
+                 <strong>LelangOnline</strong>. Syawal Alfian
               </p>
             </div>
             <div class="credits">
@@ -290,7 +289,7 @@
               Licensing information: https://bootstrapmade.com/license/
               Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=eBusiness
             -->
-              Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+              My Github <a href="https://github.com/syawalalfian">Me</a>
             </div>
           </div>
         </div>

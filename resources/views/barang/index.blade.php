@@ -22,7 +22,6 @@
                       <tr>
                         <th>No</th>
                         <th>Nama Barang</th>
-                        <th>Gambar</th>
                         <th>Tanggal</th>
                         <th>Harga Awal</th>
                         <th>Action</th>
@@ -33,9 +32,6 @@
                          <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ Str::of($barang->nama_barang)->title() }}</td>
-                            <td>
-                              <img src="{{asset('storage/'.$barang->image)}}" alt="" style="width:100px">
-                            </td>
                             <td>{{ \Carbon\Carbon::parse($barang->tanggal)->format('j-F-Y') }}</td>
                             <td>@currency($barang->harga_awal)</td>
                             <td>

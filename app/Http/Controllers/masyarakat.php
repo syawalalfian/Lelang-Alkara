@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\lelang;
-use App\Models\Barang;
-use App\Models\history_lelang;
 use Illuminate\Http\Request;
+use App\Models\barang;
+use App\Models\lelang;
 use Illuminate\Support\Facades\Auth;
 
-class LelangController extends Controller
+class masyarakat extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +17,7 @@ class LelangController extends Controller
     public function index()
     {
         //
-        $lelangs = Lelang::all();
-        $barangs = Barang::select('id', 'nama_barang', 'harga_awal')
-                    ->whereNotIn('id', function($query)
-                    {
-                        $query->select('barangs_id')->from('lelangs');
-                    })->get();
-        return view('lelang.index', compact('lelangs','barangs'));
+        return view ('masyarakat.datapenawaran');
     }
 
     /**
@@ -35,12 +28,6 @@ class LelangController extends Controller
     public function create()
     {
         //
-        $barangs = Barang::select('id', 'nama_barang', 'harga_awal')
-                    ->whereNotIn('id', function($query)
-                    {
-                        $query->select('barangs_id')->from('lelangs');
-                    })->get();
-        return view('lelang.create', compact('barangs'));
     }
 
     /**
@@ -52,10 +39,11 @@ class LelangController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate(
+         $request->validate(
             [
                 'barangs_id'         => 'required|exists:barangs,id|unique:lelangs,barangs_id',
                 'tanggal_lelang'    => 'required|date',
+                'harga_akhir'       => 'required',
             ],
             [
                 'barang_id.required'        => 'Barang Harus Diisi',
@@ -63,42 +51,43 @@ class LelangController extends Controller
                 'barang_id.unique'          => 'Barang Sudah Di Lelang',
                 'tanggal_lelang.required'   => 'Tanggal Lelang Harus Diisi',
                 'tanggal_lelang.date'       => 'Tanggal Lelang Harus Berupa Tanggal',
+                'harga_akhir.required'      => 'Harga Akhir Harus Diisi',
                 
             ]
         );
         $lelang = new Lelang;
         $lelang->barangs_id = $request->barangs_id;
         $lelang->tanggal_lelang = $request->tanggal_lelang;
-        $lelang->harga_akhir = '0';
+        $lelang->harga_akhir = $request->harga_akhir;
         $lelang->users_id = Auth::user()->id;
         $lelang->status = 'dibuka';
         $lelang->save();
 
-        return redirect()->route('lelang.index')->with('toast_success', 'Data Berhasil Ditambahkan');   
+        return redirect()->route('datapenawaran.index')->with('success', 'Data Berhasil Ditambahkan'); 
+        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\lelang  $lelang
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(lelang $lelang)
     {
         //
-        
-        $historyLelangs = History_lelang::orderBy('harga', 'desc')->get()->where('lelang_id', $lelang->id);
-        $lelangs = Lelang::find($lelang->id);   
-        return view('lelang.show', compact('lelangs', 'historyLelangs')); 
+         $lelangs = Barang::find($lelang->id);
+        return view('datapenawaran.show', compact('lelangs')); 
+       
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\lelang  $lelang
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(lelang $lelang)
+    public function edit($id)
     {
         //
     }
@@ -107,10 +96,10 @@ class LelangController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\lelang  $lelang
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, lelang $lelang)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -118,13 +107,11 @@ class LelangController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\lelang  $lelang
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(lelang $lelang)
+    public function destroy($id)
     {
         //
-        $lelangs = Lelang::select('id','barangs_id','tanggal_lelang','harga_akhir','status')->get();
-        return view('listlelang.index', compact('lelangs'));
     }
 }

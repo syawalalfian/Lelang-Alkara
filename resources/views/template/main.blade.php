@@ -17,7 +17,7 @@
   @stack('css')
 </head>
 
-<body id="page-top">
+<body  id="page-top">
   <div id="wrapper">
     <!-- Sidebar -->
     @include('template.partials.sidebar')
@@ -76,6 +76,7 @@
   @stack('scripts')
 
   @include('sweetalert::alert')
+
 </body>
 
 </html>

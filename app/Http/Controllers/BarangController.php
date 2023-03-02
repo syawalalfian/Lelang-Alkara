@@ -49,7 +49,7 @@ class BarangController extends Controller
             'nama_barang' => 'required',
             'tanggal' => 'required',
             'harga_awal' => 'required',
-            'image' => 'image|file',
+            'image' => 'required|image|file',
             'deskripsi' => 'required'
         ]);
 
@@ -99,7 +99,7 @@ class BarangController extends Controller
             
         // );  
         Barang::create($validateData);
-        return redirect()->route('barang.index')->with('success', 'Barang Berhasil Ditambahkan');
+        return redirect()->route('barang.index')->with('toast_success', 'Barang Berhasil Ditambahkan');
     }
 
     /**
@@ -168,6 +168,6 @@ class BarangController extends Controller
     {
         //
         Barang::destroy($barang->id);
-        return redirect()->route('barang.index')->with('success', 'Barang Berhasil Dihapus');
+        return redirect()->route('barang.index')->with('toast_success', 'Barang Berhasil Dihapus');
     }
 }

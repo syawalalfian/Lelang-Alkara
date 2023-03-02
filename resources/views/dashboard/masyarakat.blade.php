@@ -2,9 +2,7 @@
 
 @section('title', 'Dahsboard Masyarakat')
 
-@push('css')
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-@endpush
+
 
 @section('content')
 
@@ -26,7 +24,7 @@
             <br>
             <br>
 <div class="row">
-            @foreach ($lelangs as $lelang)
+            @forelse($lelangs as $lelang)
   
       
         <div class="col-md-3">
@@ -43,12 +41,14 @@
               <p>
                      {{$lelang->barang->deskripsi}}
              </p>
-              <a href="/penawaran" class="btn btn-success btn-block"><b>Lelang</b></a>
+              <a href="{{ route('lelangin.create', $lelang->id)}}" class="btn btn-success btn-block"><b>Lelang</b></a>
             </div>
         </div>
     </div>
+    @empty
+        
 
-    @endforeach
+    @endforelse
     </div>
     <br>
 </div>

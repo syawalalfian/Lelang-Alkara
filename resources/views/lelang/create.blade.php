@@ -37,29 +37,6 @@
                     </div>
                       </div>
 
-                          {{-- Harga Akhir --}}
-                          <label for="harga_akhir" class="form-label">{{ __('Harga Akhir') }}</label>
-                          <div class="form-group mandatory">
-                          <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">RP</span>
-                          </div>
-                          <input type="text" id="harga_akhir" class="form-control 
-                          @error('harga_akhir') is-invalid @enderror" 
-                          placeholder="Input Harga, Hanya Angka" name="harga_akhir" 
-                          data-parsley-required="true" 
-                          value="{{ old('harga_akhir') }}">
-                        </div>
-                        @error('harga_akhir')
-                            <div class="alert alert-danger alert-dismissible" role="alert">
-                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                              {{$message}}
-                            </div>
-                        @enderror
-                        </div>
-
                             {{-- Tanggal Lelang --}}
                           <div class="form-group">
                             <div class="form-group mandatory">
@@ -84,7 +61,7 @@
 
                     <div class="row">
                               <div class="col-6 d-flex justify-content-start">
-                                  <a href="{{ route('barang.index') }}" class="btn btn-outline-info me-1 mb-1">
+                                  <a href="{{ route('lelang.index') }}" class="btn btn-outline-info me-1 mb-1">
                                     {{ __('Kembali') }}
                                   </a>
                               </div>

@@ -22,6 +22,19 @@ class RegisterController extends Controller
             'password' => 'required',
             'telepon' => 'required|numeric',
         ], 
+         [
+            'name.required' => 'Nama tidak boleh kosong',
+            'name.min' => 'Nama terlalu pendek',
+            'username.required' => 'Username tidak boleh kosong',
+            'username.unique' => 'Username sudah terdaftar',
+            'username.max' => 'Username terlalu panjang',
+            'password.required' => 'Password tidak boleh kosong',
+            'passwordshow.required' => 'Password tidak boleh kosong',
+            'passwordshow.same' => 'Password tidak sama',
+            'password.min' => 'Password terlalu pendek',
+            'telepon.max' => 'No telp terlalu panjang',
+            'telepon.required' => 'No telp tidak boleh kosong',
+        ]
     );
 
         User::create([

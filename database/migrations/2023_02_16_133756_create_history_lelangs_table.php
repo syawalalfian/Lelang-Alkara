@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLelangsTable extends Migration
+class CreateHistoryLelangsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateLelangsTable extends Migration
      */
     public function up()
     {
-        Schema::create('lelangs', function (Blueprint $table) {
+        Schema::create('history_lelangs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('barangs_id');
-            $table->foreign('barangs_id')->references('id')->on('barangs')->onDelete('cascade');
+            $table->unsignedBigInteger('lelang_id');
+            $table->foreign('lelang_id')->references('id')->on('lelangs')->onDelete('cascade'); 
             $table->unsignedBigInteger('users_id');
             $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
-            $table->date('tanggal_lelang');
-            $table->integer('harga_akhir');
-            $table->enum('status', ['dibuka', 'tutup']);
+            $table->integer('harga');
+            $table->enum('status', ['pending', 'gugur', 'pemenang']);
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ class CreateLelangsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lelangs');
+        Schema::dropIfExists('history_lelangs');
     }
 }

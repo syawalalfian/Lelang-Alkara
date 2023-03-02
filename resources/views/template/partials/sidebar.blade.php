@@ -16,19 +16,37 @@
           <span>Dashboard</span></a>
       </li>
       
-      
       @if(auth()->user()->level == 'admin')
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
         Data Pengguna
       </div>
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
-         <i class="fas fa-fw fa-user"></i>
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="fas fa-users"></i>
+          <span>Data Users</span>
+        </a>
+        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+
+          <a class="nav-link" href="{{route('dataadmin.index')}}">
+         <i class="fas fa-user-edit"></i>
+          <span>Data Admin</span></a>
+
+          <a class="nav-link" href="{{route('petugas.index')}}">
+         <i class="fas fa-user-cog"></i>
           <span>Data Petugas</span></a>
+
+          <a class="nav-link" href="{{route('datamasyarakat.index')}}">
+         <i class="fas fa-user-tag"></i>
+          <span>Data Masyarakat</span></a>
+            
+          </div>
+        </div>
       </li>
       @endif
-      
+
       @if(auth()->user()->level == 'admin') 
       <hr class="sidebar-divider">
       <div class="sidebar-heading">
@@ -91,7 +109,7 @@
               Data Lelang
             </div>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="">
               <i class="fas fa-fw fa-file"></i>
                 <span>Data Penawaran Anda</span></a>
             </li>

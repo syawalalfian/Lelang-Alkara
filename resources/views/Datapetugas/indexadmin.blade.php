@@ -1,46 +1,44 @@
 @extends('template.main')
 
-@section('title', 'Data Lelang')
+@section('title', 'Create Data Admin')
 
 @push('css')
     <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @endpush
 
 @section('content')
- <div class="d-sm-flex align-items-center justify-content-between mb-4 col-md-12">
-            <h1 class="h3 mb-0 text-gray-800">Data Barang Lelang</h1>
-            <a href="{{route('lelang.create')}}" class="btn btn-success ">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 col-md-12">
+            <h1 class="h3 mb-0 text-gray-800">Data Admin</h1>
+            <a href="{{route('dataadmin.create')}}" class="btn btn-success ">
                 <i class="fa fa-plus md-2 pr-1" aria-hidden="true"></i>Tambah
              </a>
           </div>
-          
-              <div class="card mb-4">
+
+          <div class="card mb-4">
                
                 <div class="table-responsive p-3">
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
                         <th>No</th>
-                        <th>Nama barang</th>
-                        <th>Harga awal</th>
-                        <th>Harga lelang</th>
-                        <th>Tanggal lelang</th>
-                        <th>Status</th>
+                        <th>Nama Petugas</th>
+                        <th>Username</th>
+                        <th>level</th>
+                        <th>No Telepon</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @forelse ($lelangs as $lelang)
+                        @forelse ($usersadmin as $value)
                          <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{$lelang->barang->nama_barang}}</td>
-                            <td>@currency(($lelang->barang->harga_awal))</td>
-                            <td>@currency(($lelang->harga_akhir))</td>
-                            <td>{{ \Carbon\Carbon::parse($lelang->tanggal_lelang)->format('j-F-Y') }}</td>
-                            <td><span class="badge {{ $lelang->status == 'ditutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span></td>
+                            <td>{{$value->name}}</td>
+                            <td>{{$value->username}}</td>
+                            <td>{{$value->level}}</td>
+                            <td>{{$value->telepon}}</td>
                             <td>
-                                <form action="{{route('lelang.destroy', $lelang->id)}}" method="POST">
-                                <a href="{{ route('lelang.show', $lelang->id)}}" class="btn btn-info btn-sm">
+                                <form action="{{ route('dataadmin.destroy', $value->id) }}" method="POST">
+                                  <a href="{{ route('petugas.show', $value->id) }}" class="btn btn-info btn-sm">
                                 <i class="bi bi-info-square"></i>Show
                                 </a>
                                 <a href="" class="btn btn-warning btn-sm">
@@ -65,17 +63,6 @@
                   </table>
                 </div>
               </div>
-            
+
+          
 @endsection
-
-@push('scripts')
-    <script src="{{asset('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-    <script>
-    $(document).ready(function () {
-      $('#dataTable').DataTable(); // ID From dataTable 
-      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-    });
-  </script>
-@endpush
-

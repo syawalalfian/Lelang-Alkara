@@ -15,7 +15,7 @@
 
 </head>
 
-<body class="bg-gradient-login">
+<body background="{{asset('assets\img\rainbow.png')}}" >
   <!-- Login Content -->
   <div class="container-login">
     <div class="row justify-content-center">
@@ -32,19 +32,31 @@
                     <form action="{{ route('login.proses') }}" method="POST">
                       @csrf
                     <div class="form-group">
-                      <input type="text" class="form-control" name="username" placeholder="Username">
+                      <input type="text" class="form-control @error('username') is-invalid @enderror" name="username"  placeholder="Username">
                     </div>
+                    @error('username')
+                      <div class="alert alert-danger" role="alert">
+                      {{ $message }}
+                    </div>
+                    @enderror
 
                     <div class="form-group">
-                      <input type="password" class="form-control" name="password" placeholder="Password">
+                      <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
                     </div>
+                    @error('password')
+                    <div class="alert alert-danger" role="alert">
+                    {{ $message }}
+                  </div>
+                    @enderror
 
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
-                        <input type="checkbox" class="custom-control-input" >
-                        <label class="custom-control-label" for="customCheck">Remember Me</label>
+                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                        <label class="custom-control-label" for="customCheck">Remember
+                          Me</label>
                       </div>
                     </div>
+                    
                     <div class="form-group">
                       <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>

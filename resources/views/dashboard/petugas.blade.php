@@ -14,40 +14,54 @@
 
           <div class="row mb-3">
             <!-- Earnings (Monthly) Card Example -->
+            
+            <!-- Earnings (Annual) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
-                <div class="card-body">
-                  <div class="row align-items-center">
+                <div class="card-body bg-gradient-success text-white">
+                  <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Earnings (Monthly)</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                        <span>Since last month</span>
-                      </div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Barang</div>
+                      <div class="h5 mb-0 font-weight-bold text-white-800">{{ $totalbarang }}</div>
+                      
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                         <i class="fas fa-boxes fa-2x text-success-bold"></i>
+                      
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- Earnings (Annual) Card Example -->
+           
+            <!-- New User Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
               <div class="card h-100">
-                <div class="card-body">
+                <div class="card-body bg-gradient-info text-white ">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Sales</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">650</div>
-                      <div class="mt-2 mb-0 text-muted text-xs">
-                        <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
-                        <span>Since last years</span>
-                      </div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Lelang</div>
+                      <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">{{ $totallelang }}</div>
+                      
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                      <i class="fas fa-gavel fa-2x text-info-bold"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>  
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card h-100">
+                <div class="card-body bg-gradient-warning text-white">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Penawaran</div>
+                      <div class="h5 mb-0 font-weight-bold text-white-800">{{ $totalpenawaran }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-paper-plane fa-2x text-warning-bold"></i>
                     </div>
                   </div>
                 </div>

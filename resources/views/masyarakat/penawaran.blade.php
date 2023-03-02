@@ -1,14 +1,12 @@
 @extends('template.main')
 
-@section('title', 'Detail Data Barang Lelang' )
-
+@section('title', 'Penawaran Anda')
 
 @section('content')
- 
-   <div class="d-sm-flex align-items-center justify-content-between mb-4 col-md-12">
-            <h1 class="h3 mb-0 text-gray-800">Detail Data Barang</h1>
+    <div class="d-sm-flex align-items-center justify-content-between mb-4 col-md-12">
+            <h1 class="h3 mb-0 text-gray-800">Penawaran Anda</h1>
           </div>
-          
+
           @if(!empty($lelangs))
      <div class="row">
         <div class="col-lg-7">
@@ -81,16 +79,92 @@
 
                       <div class="row">
                               <div class="col-6 d-flex justify-content-start">
-                                  <a href="{{ route('lelang.index') }}" class="btn btn-outline-info me-1 mb-1">
+                                  <a href="{{ route('dashboard.masyarakat') }}" class="btn btn-outline-info me-1 mb-1">
                                     {{ __('Kembali') }}
                                   </a>
                               </div>
                               
+                              
                        </div>
                       </div>
                     </div> 
+                    </div> 
+
+                    {{-- Input Tawar --}}
+               
+                {{-- <form action="{{route('lelangin.store', $lelangs->id)}}" method="post" class="col-md-12">
+                    @csrf
+                <label for="harga" class="form-label">{{ __('Penawaran Anda') }}</label>
+            <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">RP</span>
+                      </div>
+                      <input
+                        type="text"
+                        name="harga_penawaran"
+                        class="form-control"
+                        aria-label="Amount (to the nearest dollar)"
+                        placeholder="Input Harga Lelang, Hanya Angka"/>
+                        <div class="col-1 d-flex justify-content-start">
+                          <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
+                        </div>
+              </div>
+              </form> --}}
+
+              <div class="card col-md-12">
+               <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                  <h6 class="m-0 font-weight-bold text-primary">Data Pelelang {{$lelangs->barang->nama_barang}}</h6>
+                  <div class="col-6 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary me-1 mb-1" data-toggle="modal" data-target="#myModal">
+                   {{ __('Tawar') }}
+                    </button>
+                  </div>
+                  @include('modal')
+                </div>
+                
+              <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>No</th>
+                        <th>Customer</th>
+                        <th>Nama Barang</th>
+                        <th>Harga Penawaran</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    @forelse ($historyLelangs as $item)
+                        <tbody>
+                      <tr>
+                         <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $item->user->username }}</td>
+                        <td>{{ $item->lelang->barang->nama_barang }}</td>
+                        <td>@currency($item->harga)</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('j-F-Y') }}</td>
+                        <td><span class="badge {{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span></td>
+                        {{-- <td><span class="badge badge-danger">"{{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span></td> --}}
+                      </tr>
+                      </tr>
+                     
+                    </tbody>
+                    @empty
+                      
+                    @endforelse
+                    
+                  </table>
+                </div>
+            </div>
+            <div class="card-footer"></div>
+
+
 
 </div>
 
 @endif
+
+@push('scripts')
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+@endpush
 @endsection

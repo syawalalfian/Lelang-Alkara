@@ -1,6 +1,6 @@
 @extends('template.main')
 
-@section('title', 'Data Lelang')
+@section('title', 'Data Barang')
 
 @push('css')
     <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
@@ -8,8 +8,8 @@
 
 @section('content')
  <div class="d-sm-flex align-items-center justify-content-between mb-4 col-md-12">
-            <h1 class="h3 mb-0 text-gray-800">Data Barang Lelang</h1>
-            <a href="{{route('lelang.create')}}" class="btn btn-success ">
+            <h1 class="h3 mb-0 text-gray-800">Data Barang</h1>
+            <a href="{{route('barang.create')}}" class="btn btn-success ">
                 <i class="fa fa-plus md-2 pr-1" aria-hidden="true"></i>Tambah
              </a>
           </div>
@@ -21,29 +21,25 @@
                     <thead class="thead-light">
                       <tr>
                         <th>No</th>
-                        <th>Nama barang</th>
-                        <th>Harga awal</th>
-                        <th>Harga lelang</th>
-                        <th>Tanggal lelang</th>
-                        <th>Status</th>
+                        <th>Nama Barang</th>
+                        <th>Tanggal</th>
+                        <th>Harga Awal</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                        @forelse ($lelangs as $lelang)
+                        @forelse ($barangs as $barang)
                          <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{$lelang->barang->nama_barang}}</td>
-                            <td>@currency(($lelang->barang->harga_awal))</td>
-                            <td>@currency(($lelang->harga_akhir))</td>
-                            <td>{{ \Carbon\Carbon::parse($lelang->tanggal_lelang)->format('j-F-Y') }}</td>
-                            <td><span class="badge {{ $lelang->status == 'ditutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span></td>
+                            <td>{{ Str::of($barang->nama_barang)->title() }}</td>
+                            <td>{{ \Carbon\Carbon::parse($barang->tanggal)->format('j-F-Y') }}</td>
+                            <td>@currency($barang->harga_awal)</td>
                             <td>
-                                <form action="{{route('lelang.destroy', $lelang->id)}}" method="POST">
-                                <a href="{{ route('lelang.show', $lelang->id)}}" class="btn btn-info btn-sm">
+                                <form action="{{ route('barang.destroy', $barang->id) }}" method="POST">
+                                <a href="{{ route('barang.show', $barang->id) }}" class="btn btn-info btn-sm">
                                 <i class="bi bi-info-square"></i>Show
                                 </a>
-                                <a href="" class="btn btn-warning btn-sm">
+                                <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil-square"></i>Edit
                                 </a>
                                 @csrf
@@ -56,10 +52,8 @@
                             
                         </tr>   
                         @empty
-
-                         @endforelse
                             
-                        
+                        @endforelse
                       
                     </tbody>
                   </table>
@@ -78,4 +72,3 @@
     });
   </script>
 @endpush
-

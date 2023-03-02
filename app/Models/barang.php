@@ -10,10 +10,11 @@ class barang extends Model
 {
     use HasFactory;
     protected $table = 'barangs';
-    protected $fillable = [ 'nama_barang','tanggal','harga_awal','deskripsi', 'image','created_at','updated_at'];
+    protected $fillable = ['nama_barang','tanggal','harga_awal','deskripsi', 'image','created_at','updated_at'];
     
     public function lelang()
     {
         return $this->belongsTo(Lelang::class);
     }
+    
 }
