@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Intervention\Image\Facades\assets;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BarangController extends Controller
 {
@@ -124,7 +125,7 @@ class BarangController extends Controller
     public function edit(barang $barang)
     {
         //
-        $barangs = Barang::select('id', 'nama_barang', 'tanggal', 'harga_awal', 'deskripsi', 'image')->where('id', $barang->id)->get();
+         $barangs = Barang::find($barang->id);
         return view('barang.edit', compact('barangs'));
     }
 
@@ -138,21 +139,25 @@ class BarangController extends Controller
     public function update(Request $request, barang $barang)
     {
         //
-        $request->validate(
-            [
-                'nama_barang' => 'required|min:5|max:25',
-                'tanggal' => 'required',
-                'harga_awal' => 'required|numeric',
-                'deskripsi' => 'required|min:10|max:100',
-            ] );
+        $rules = [
+            'nama_barang' => 'required',
+            'tanggal' => 'required',
+            'harga_awal' => 'required',
+            'image' => 'image|file',
+            'deskripsi' => 'required',
+        ];
+    
 
-            Barang::where('id', $barang->id)
-            ->update([
-                'nama_barang' => Str::lower($request->nama_barang),
-                'tanggal' => $request->tanggal,
-                'harga_awal' => $request->harga_awal,
-                'deskripsi' => Str::lower($request->deskripsi),
-            ]);
+    $validateData = $request->validate($rules);
+    if ($request->file('image')) {
+        if($request->oldImage){
+                Storage::delete($request->oldImage);
+            }
+        $validateData['image'] = $request->file('image')->store('barang-image');
+    }
+
+           Barang::where('id', $barang->id)
+               ->update($validateData);
 
         return redirect()->route('barang.index')->with('success', 'Barang Berhasil Diubah');
         
@@ -167,6 +172,9 @@ class BarangController extends Controller
     public function destroy(barang $barang)
     {
         //
+        if($barang->Image){
+                Storage::delete($barang->image);
+            }
         Barang::destroy($barang->id);
         return redirect()->route('barang.index')->with('toast_success', 'Barang Berhasil Dihapus');
     }

@@ -17,7 +17,7 @@ class masyarakat extends Controller
     public function index()
     {
         //
-        return view ('masyarakat.datapenawaran');
+        return view ('penawaran.index');
     }
 
     /**

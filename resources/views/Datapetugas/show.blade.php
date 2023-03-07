@@ -14,8 +14,18 @@
               <img src="{{asset('assets/img/boy.png')}}" alt="avatar"
               class="rounded-circle img-fluid" style="width: 150px;">
               @endif
-            <h5 class="my-3">{{Auth::user()->username}}</h5>
-            <p class="text-muted mb-1">{{Auth::user()->level}}</p>
+
+              @if($users->username == 'admin')
+            <h5 class="my-3">{{$users->username }}</h5>
+              @else($users->username == 'petugas')
+              <h5 class="my-3">{{$users->username }}</h5>
+              @endif
+
+              @if($users->level == 'admin')
+            <p class="text-muted mb-1">{{$users->level}}</p>
+            @else($users->username == 'petugas')
+             <p class="text-muted mb-1">{{$users->level}}</p>
+             @endif
             
           </div>
         </div>
@@ -28,7 +38,13 @@
                 <p class="mb-0">Full Name</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{Auth::user()->name}}</p>
+
+                @if($users->level == 'admin')
+                <p class="text-muted mb-0">{{$users->name}}</p>
+                @else($users->username == 'petugas')
+                <p class="text-muted mb-0">{{$users->name}}</p>
+                @endif
+
               </div>
             </div>
             <hr>
@@ -37,7 +53,13 @@
                 <p class="mb-0">Email</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{Auth::user()->username}}</p>
+
+                @if($users->level == 'admin')
+                <p class="text-muted mb-0">{{$users->username}}</p>
+                @else($users->username == 'petugas')
+                <p class="text-muted mb-0">{{$users->username}}</p>
+                @endif
+
               </div>
             </div>
             <hr>
@@ -46,7 +68,13 @@
                 <p class="mb-0">Phone</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{Auth::user()->telepon}}</p>
+
+                @if($users->level == 'admin')
+                <p class="text-muted mb-0">{{$users->telepon}}</p>
+                @else($users->username == 'petugas')
+                <p class="text-muted mb-0">{{$users->telepon}}</p>
+                @endif
+
               </div>
             </div>
             <hr>
@@ -55,7 +83,13 @@
                 <p class="mb-0">Level</p>
               </div>
               <div class="col-sm-9">
-                <p class="text-muted mb-0">{{Auth::user()->level}}</p>
+
+                @if($users->level == 'admin')
+                <p class="text-muted mb-0">{{$users->level}}</p>
+                @else($users->username == 'petugas')
+                <p class="text-muted mb-0">{{$users->level}}</p>
+                @endif
+
               </div>
             </div>
           </div>

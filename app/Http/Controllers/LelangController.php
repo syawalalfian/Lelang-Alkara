@@ -40,7 +40,7 @@ class LelangController extends Controller
                     {
                         $query->select('barangs_id')->from('lelangs');
                     })->get();
-        return view('lelang.create', compact('barangs'));
+        return view('lelang.index', compact('barangs'));
     }
 
     /**

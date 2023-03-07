@@ -1,20 +1,16 @@
-@extends('template.main')
-
-@section('title', 'Tambah Data Lelang')
-
-@section('content')
-    <div class="d-sm-flex align-items-center justify-content-between mb-4 col-md-12">
-            <h1 class="h3 mb-0 text-gray-800">Tambah Data Barang</h1>
-          </div>
-     <div class="row">
-            <div class="col-lg-12">
-    <div class="card mb-4">
-                <form action="{{route('lelang.store')}}" method="post" data-parsley-validate enctype="multipart/form-data"> 
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ __('Pilih Barang Yang Ingin Di Lelang') }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{route('lelang.store')}}" method="post" class="col-md-12">
                     @csrf
-                  <div class="card-body">
-                    
-                      <div class="form-group">
-                        
+                    <div class="form-group">
                         {{-- Nama Barang And Harga Awal --}}
                         <div class="form-group mandatory">
                          <label for="barangs_id" class="form-label">{{ __('Nama Barang') }}</label>
@@ -55,28 +51,14 @@
                             </div>
                         @enderror
                           </div>
-
-                      
-                     
-
-                    <div class="row">
-                              <div class="col-6 d-flex justify-content-start">
-                                  <a href="{{ route('lelang.index') }}" class="btn btn-outline-info me-1 mb-1">
-                                    {{ __('Kembali') }}
-                                  </a>
-                              </div>
-                            <div class="col-6 d-flex justify-content-end">
-                                <button type="submit" class="btn btn-primary me-1 mb-1" >
-                                  {{ __('Submit') }}
-                                </button>
-                              
-                            </div>
-                          </div>
-                    </form>
-                    
-                  </div>
-                </div>
-                  </div>
-     </div>
-@endsection
+              
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
   

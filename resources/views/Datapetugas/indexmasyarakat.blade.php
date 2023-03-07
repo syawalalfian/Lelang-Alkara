@@ -37,7 +37,7 @@
                             <td>{{$value->level}}</td>
                             <td>{{$value->telepon}}</td>
                             <td>
-                                <form action="{{ route('petugas.destroy', $value->id) }}" method="POST">
+                                <form action="{{ route('datamasyarakat.destroy', $value->id) }}" method="POST">
                                 
                                 @csrf
                                 @method('DELETE')

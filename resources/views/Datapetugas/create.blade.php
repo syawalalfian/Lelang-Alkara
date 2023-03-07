@@ -1,6 +1,6 @@
 @extends('template.main')
 
-@section('title', 'Data Masyarakat')
+@section('title', 'Create Data Petugas')
 
 @section('content')
     <div class="container-fluid">
@@ -18,6 +18,11 @@
                                                 <input type="text" value="{{old('name')}}" class="form-control" id="name" name="name" placeholder="Enter a username..">
                                             </div>
                                         </div>
+                                        @error('name')
+                                            <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                            </div>
+                                            @enderror
                                         
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="username">Username <span class="text-danger">*</span>
@@ -26,6 +31,11 @@
                                                 <input type="text" value="{{old('username')}}" class="form-control" id="username" name="username" placeholder="Your valid email..">
                                             </div>
                                         </div>
+                                        @error('username')
+                                            <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                            </div>
+                                            @enderror
 
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span>
@@ -34,6 +44,11 @@
                                                 <input type="password" value="{{old('password')}}" class="form-control" id="password" name="password" placeholder="Choose a safe one..">
                                             </div>
                                         </div>
+                                        @error('password')
+                                            <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                            </div>
+                                            @enderror
 
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="level">Level <span class="text-danger">*</span>
@@ -46,6 +61,11 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        @error('level')
+                                            <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                            </div>
+                                            @enderror
 
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="telepon">No Telephone <span class="text-danger">*</span>
@@ -54,6 +74,11 @@
                                                 <input type="text" value="{{old('telepon')}}" class="form-control" id="telepon" name="telepon" placeholder="Masukan Nomor">
                                             </div>
                                         </div>
+                                        @error('telepon')
+                                            <div class="alert alert-danger" role="alert">
+                                            {{ $message }}
+                                            </div>
+                                            @enderror
 
                                         <div class="form-group row">
                                              <div class="col-lg-5 ml-auto">

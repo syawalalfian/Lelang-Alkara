@@ -9,10 +9,11 @@
 @section('content')
  <div class="d-sm-flex align-items-center justify-content-between mb-4 col-md-12">
             <h1 class="h3 mb-0 text-gray-800">Data Barang Lelang</h1>
-            <a href="{{route('lelang.create')}}" class="btn btn-success ">
-                <i class="fa fa-plus md-2 pr-1" aria-hidden="true"></i>Tambah
-             </a>
+            <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+              <i class="fa fa-plus md-2 pr-1" aria-hidden="true"></i>Tambah
+            </button>
           </div>
+          @include('lelang.create')
           
               <div class="card mb-4">
                
@@ -39,19 +40,11 @@
                             <td>{{ \Carbon\Carbon::parse($lelang->tanggal_lelang)->format('j-F-Y') }}</td>
                             <td><span class="badge {{ $lelang->status == 'ditutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span></td>
                             <td>
-                                <form action="{{route('lelang.destroy', $lelang->id)}}" method="POST">
+                               
                                 <a href="{{ route('lelang.show', $lelang->id)}}" class="btn btn-info btn-sm">
                                 <i class="bi bi-info-square"></i>Show
                                 </a>
-                                <a href="" class="btn btn-warning btn-sm">
-                                <i class="bi bi-pencil-square"></i>Edit
-                                </a>
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">
-                                    <i class="bi bi-trash"></i>Delete
-                                </button>
-                                </form>
+                                
                             </td>
                             
                         </tr>   

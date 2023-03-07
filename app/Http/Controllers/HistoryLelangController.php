@@ -6,6 +6,7 @@ use App\Models\history_lelang;
 use Illuminate\Http\Request;
 use App\Models\lelang;
 use App\Models\Barang;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -22,8 +23,11 @@ class HistoryLelangController extends Controller
      */
     public function index()
     {
-        $historylelangs = history_lelang::all();
-        return view('penawaran.index', compact('historylelangs', 'lelangs','barangs'));
+        $historyLelangs = history_lelang::orderBy('harga', 'desc')->get()->where('users_id',Auth::user()->id);
+        $lelangs = Lelang::all();
+        $barangs = Barang::all();
+        $users = User::all();
+        return view('penawaran.index', compact('users','historyLelangs','lelangs','barangs'));
         
     }
 
@@ -61,7 +65,7 @@ class HistoryLelangController extends Controller
                 function ($attribute, $value, $fail) use ($lelang) {
                     if ($value <= $lelang->barang->harga_awal) {
                         $message = "Harga penawaran harus lebih besar dari harga awal yaitu " . "Rp " . number_format($lelang->barang->harga_awal, 0, ',', '.');
-                        Alert::error('Error', $message);
+                        Alert::toast($message, 'error');
                         return $fail($message);
                     }
                 },

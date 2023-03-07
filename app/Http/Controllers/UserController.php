@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 Use App\Models\barang;
 Use App\Models\user;
-
+use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -91,7 +92,8 @@ class UserController extends Controller
             'telepon' => ($data['telepon']),
         ]);
 
-        return redirect()->route('petugas.index')->with('success','Data Akun Berhasil Dibuat');
+        Alert::toast('Akun Petugas Berhasil Dibuat','success')->timerProgressBar()->autoClose(3000);
+        return redirect()->route('petugas.index');
     
 
     }
@@ -129,10 +131,14 @@ class UserController extends Controller
             'telepon' => ($data['telepon']),
         ]);
 
-        return redirect()->route('dataadmin.index')->with('success','Data Akun Berhasil Dibuat');
+        Alert::toast('Akun Admin Berhasil Dibuat','success')->timerProgressBar()->autoClose(3000);
+        return redirect()->route('dataadmin.index');
+        
     
 
     }
+
+    
 
     /**
      * Display the specified resource.
@@ -153,9 +159,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
         //
+        $users = User::find($user->id);
+        return view('Datapetugas.edit', compact('users'));
     }
 
     /**
@@ -181,14 +189,26 @@ class UserController extends Controller
         //
         $users = User::find($user->id);
         $users->delete();
-        return redirect('Admin/Datapetugas')->with('deletesuccess','Data Akun Berhasil Dihapus');
+        Alert::toast('Akun Petugas Berhasil Di Hapus','success')->timerProgressBar()->autoClose(3000);
+        return redirect('Admin/Datapetugas');
     }
+
+    public function destroymasyarakat(user $user)
+    {
+        //
+        $users = User::find($user->id);
+        $users->delete();
+        Alert::toast('Akun Masyarakat Berhasil Di Hapus','success')->timerProgressBar()->autoClose(3000);
+        return redirect('Admin/Datapetugas');
+    }
+
     public function hapuskan(user $user)
     {
         //
         $users = User::find($user->id);
         $users->delete();
-        return redirect()->route('dataadmin.index')->with('deletesuccess','Data Akun Berhasil Dihapus');
+        Alert::toast('Akun Admin Berhasil Di Hapus','success')->timerProgressBar()->autoClose(3000);
+        return redirect()->route('dataadmin.index');
     }
 
     public function profile()
@@ -196,4 +216,6 @@ class UserController extends Controller
          
         return view('penawaran.profile');
     }
+
+    
 }

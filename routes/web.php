@@ -56,6 +56,7 @@ Route::controller(BarangController::class)->group(function() {
         Route::delete('barang/{barang}', 'destroy')->name('barang.destroy');
         });
     });
+    
 Route::controller(UserController::class)->group(function () {
 Route::get('Admin/Datapetugas', 'index')->name('petugas.index')->middleware(['auth', 'level:admin']);
 Route::get('Admin/Dataadmin', 'dataadmin')->name('dataadmin.index')->middleware(['auth', 'level:admin']);
@@ -63,9 +64,11 @@ Route::get('Admin/Datamasyarakat', 'datamasyarakat')->name('datamasyarakat.index
 Route::get('Admin/Createpetugas', 'create')->name('petugas.create')->middleware(['auth', 'level:admin']);
 Route::get('Admin/Createadmin', 'createadmin')->name('dataadmin.create')->middleware(['auth', 'level:admin']);
 Route::post('user', 'store')->name('user.store')->middleware(['auth', 'level:admin']);
+Route::post('dataadmin', 'dataadminstore')->name('dataadmin.store')->middleware(['auth', 'level:admin']);
 Route::get('Admin/Createadmin', 'createadmin')->name('dataadmin.create')->middleware(['auth', 'level:admin']);
 Route::get('Admin/Datapetugas/{user}', 'show')->name('petugas.show')->middleware(['auth', 'level:admin']);
 Route::delete('Admin/Datapetugas/{user}', 'destroy')->name('petugas.destroy')->middleware(['auth', 'level:admin']);
+Route::delete('Admin/Datamasyarakat/{user}', 'destroymasyarakat')->name('datamasyarakat.destroy')->middleware(['auth', 'level:admin']);
 Route::delete('Admin/Dataadmin/{user}', 'hapuskan')->name('dataadmin.destroy')->middleware(['auth', 'level:admin']);
 });
 
@@ -93,8 +96,9 @@ Route::controller(LelangController::class)->group(function() {
 });
 
 Route::controller(HistoryLelangController::class)->group(function () {
-       Route::get('/menawar/{lelang}', 'create')->name('lelangin.create');
-      Route::post('/menawar/{lelang}', 'store')->name('lelangin.store');
+       Route::get('datapenawaran', 'index')->name('datapenawaran.index')->middleware(['auth', 'level:masyarakat']);
+       Route::get('/menawar/{lelang}', 'create')->name('lelangin.create')->middleware(['auth', 'level:masyarakat']);
+      Route::post('/menawar/{lelang}', 'store')->name('lelangin.store')->middleware(['auth', 'level:masyarakat']);
 });
 
 

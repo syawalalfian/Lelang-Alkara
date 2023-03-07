@@ -41,7 +41,7 @@
                                 <a href="{{ route('petugas.show', $value->id) }}" class="btn btn-info btn-sm">
                                 <i class="bi bi-info-square"></i>Show
                                 </a>
-                                <a href="" class="btn btn-warning btn-sm">
+                                <a href="{{route('petugas.create')}}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil-square"></i>Edit
                                 </a>
                                 @csrf

@@ -115,7 +115,7 @@
                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Data Pelelang {{$lelangs->barang->nama_barang}}</h6>
                   <div class="col-6 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary me-1 mb-1" data-toggle="modal" data-target="#myModal">
+                    <button type="submit" class="btn btn-primary me-1 mb-1" data-toggle="modal" data-target="#myModal"   >
                    {{ __('Tawar') }}
                     </button>
                   </div>
@@ -139,7 +139,7 @@
                       <tr>
                          <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->user->username }}</td>
+                        <td>{{Str::title($item->user->username)}}</td>
                         <td>{{ $item->lelang->barang->nama_barang }}</td>
                         <td>@currency($item->harga)</td>
                         <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('j-F-Y') }}</td>
