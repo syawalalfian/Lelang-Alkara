@@ -6,6 +6,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LelangController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HistoryLelangController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\masyarakat;
 use App\Http\Controllers\UserController;
@@ -104,5 +105,11 @@ Route::controller(HistoryLelangController::class)->group(function () {
         Route::put('/lelang/{id}/pemenang', 'setpemenang')->name('lelang.setpemenang');
 });
 
+Route::controller(LaporanController::class)->group(function () {
+    Route::get('Laporan', 'laporanlelang')->name('laporan.index');
+    Route::get('cetaklaporan', 'cetakpdf')->name('cetaklaporan.index');
+     Route::get('generate-pdfall', 'cetakpdf')->name('cetakpdf');
+    
+});
 
 

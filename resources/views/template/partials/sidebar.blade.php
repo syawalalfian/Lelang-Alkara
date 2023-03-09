@@ -87,7 +87,7 @@
               Data Laporan
             </div>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="{{route('laporan.index')}}">
               <i class="fas fa-fw fa-file"></i>
                 <span>Laporan</span></a>
             </li>
@@ -97,7 +97,7 @@
               Data Laporan
             </div>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="{{route('laporan.index')}}">
               <i class="fas fa-fw fa-file"></i>
                 <span>Laporan</span></a>
             </li>
