@@ -2,6 +2,10 @@
 
 @section('title', 'Dashboard Admin')
 
+@push('css')
+    <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+@endpush
+
 @section('content')
     <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -19,7 +23,7 @@
                 <div class="card-body bg-gradient-primary text-white">
                   <div class="row align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Petugas</div>
+                      <div class="text-xs font-weight-bold text-uppercase mb-1">Jumlah Operator</div>
                       <div class="h5 mb-0 font-weight-bold text-white-800">{{ $totaluser }}</div>
                       
                     </div>
@@ -87,7 +91,7 @@
         <div class="container-fluid">
                 <div class="row">
                    <div class="col-lg-6">
-                        <div class="card">
+                        <div class="card mb-5">
                             <div class="card-body">
                                 <h4 class="card-title">Data Operator</h4>
                                 <div class="table-responsive">
@@ -154,8 +158,54 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-lg-12">
+                        <div class="card mb-5">
+                            <div class="card-body">
+                                <h4 class="card-title">Data Barang</h4>
+                                <div class="table-responsive p-3">
+                                    <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>No</th>
+                        <th>Nama Barang</th>
+                        <th>Tanggal</th>
+                        <th>Harga Awal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($barangs1 as $barang)
+                         <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ Str::of($barang->nama_barang)->title() }}</td>
+                            <td>{{ \Carbon\Carbon::parse($barang->tanggal)->format('j-F-Y') }}</td>
+                            <td>@currency($barang->harga_awal)</td>
+                        </tr>   
+                        @empty
+                            Data Masih Kosong
+                        @endforelse
+                      
+                    </tbody>
+                  </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
                     
     </div>            
     </div>            
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{asset('assets/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
+    <script>
+    $(document).ready(function () {
+      $('#dataTable').DataTable(); // ID From dataTable 
+      $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+    });
+  </script>
+@endpush

@@ -29,4 +29,5 @@ class lelang extends Model
         return $this->belongsTo(HistoryLelang::class);
     }
     
+    
 }

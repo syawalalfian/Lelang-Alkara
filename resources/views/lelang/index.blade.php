@@ -27,6 +27,7 @@
                         <th>Harga lelang</th>
                         <th>Tanggal lelang</th>
                         <th>Status</th>
+                        <th>Pemenang</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -38,11 +39,16 @@
                             <td>@currency(($lelang->barang->harga_awal))</td>
                             <td>@currency(($lelang->harga_akhir))</td>
                             <td>{{ \Carbon\Carbon::parse($lelang->tanggal_lelang)->format('j-F-Y') }}</td>
-                            <td><span class="badge {{ $lelang->status == 'ditutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span></td>
+                            <td><span class="badge text-white {{ $lelang->status == 'tutup' ? 'bg-danger' : 'bg-success' }}">{{ Str::title($lelang->status) }}</span></td>
                             <td>
-                               
-                                <a href="{{ route('lelang.show', $lelang->id)}}" class="btn btn-info btn-sm">
+                              <span>{{$lelang->pemenang}}</span>
+                            </td>
+                            <td>
+                                <a href="{{ route('lelang.edit', $lelang->id)}}" class="btn btn-info btn-sm">
                                 <i class="bi bi-info-square"></i>Show
+                                </a>
+                                <a href="{{ route('lelang.show', $lelang->id)}}" class="btn btn-success btn-sm">
+                                <i class="bi bi-success-square"></i>Penawar
                                 </a>
                                 
                             </td>

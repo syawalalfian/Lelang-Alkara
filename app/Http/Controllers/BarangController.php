@@ -9,6 +9,7 @@ use Intervention\Image\Facades\assets;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class BarangController extends Controller
 {
@@ -100,7 +101,8 @@ class BarangController extends Controller
             
         // );  
         Barang::create($validateData);
-        return redirect()->route('barang.index')->with('toast_success', 'Barang Berhasil Ditambahkan');
+        Alert::toast('Barang Berhasil Ditambahkan','success')->timerProgressBar()->autoClose(3000);
+        return redirect()->route('barang.index');
     }
 
     /**

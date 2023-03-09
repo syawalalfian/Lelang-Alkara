@@ -15,17 +15,19 @@ class dashboard extends Controller
     public function admin()
     {   
         $users = User::all();
+        $barangs1 = Barang::all();
         $barangs = DB::table('barangs')->count();   
         $lelangs = DB::table('lelangs')->count();
         $historylelangs = DB::table('history_lelangs')->count();
-        $users = DB::table('users')->where('level', 'petugas')->count();
+        $users = DB::table('users')->where('level', '=', 'admin')
+            ->orWhere('level', '=', 'petugas')
+            ->get()->count();
         $usersoperator = DB::table('users')
             ->where('level', '=', 'admin')
-            ->orWhere('level', '=', 'petugas')
-            ->get();
+            ->orWhere('level', '=', 'petugas')->paginate(3);
         $usersmasyarakat = DB::table('users')
             ->where('level', '=', 'masyarakat')->get();
-        return view('dashboard.admin',compact('users','usersoperator','usersmasyarakat'))->with(['totalbarang'=>$barangs,'totallelang'=>$lelangs,'totaluser'=>$users,'totalpenawaran'=>$historylelangs]);
+        return view('dashboard.admin',compact('users','usersoperator','usersmasyarakat','barangs1'))->with(['totalbarang'=>$barangs,'totallelang'=>$lelangs,'totaluser'=>$users,'totalpenawaran'=>$historylelangs]);
     }
 
     public function petugas()
@@ -38,11 +40,11 @@ class dashboard extends Controller
     
     }
 
-    public function masyarakat(barang $barangs)
+    public function masyarakat()
     {   
         // dd ($barangs);
         $barangs = barang::all();
-        $lelangs = lelang::all();
+        $lelangs = lelang::all()->where('status', 'dibuka');
         return view('dashboard.masyarakat', compact('lelangs'));
     }
 

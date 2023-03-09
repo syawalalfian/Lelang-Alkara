@@ -86,6 +86,31 @@ class HistoryLelangController extends Controller
         return redirect()->route('lelangin.create', $lelang->id)->with('toast_success', 'Anda Berhasil Menawar Barang Ini')->with('ucapan','');
     }
 
+    public function setpemenang(Lelang $lelang, $id)
+    {
+        
+        $historyLelang = history_lelang::find($id);
+        $historyLelang->status = 'pemenang';
+        $historyLelang->save();
+
+        history_lelang::where('lelang_id', $historyLelang->lelang_id)
+        ->where('status', 'pending')
+        ->where('id', '<>', $historyLelang->id)
+        ->update(['status' => 'gugur']);
+
+        $lelang = $historyLelang->lelang;
+
+            
+        $lelang->status = 'tutup';
+        $lelang->pemenang = $historyLelang->user->name;
+        $lelang->harga_akhir = $historyLelang->harga;
+        $lelang->save();
+
+          return redirect()->back()->with('success', 'Pemenang berhasil dipilih!');
+    
+
+    }
+
     /**
      * Display the specified resource.
      *

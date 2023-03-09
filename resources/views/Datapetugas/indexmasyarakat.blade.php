@@ -32,9 +32,9 @@
                         @forelse ($usersmasyarakat as $value)
                          <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{$value->name}}</td>
-                            <td>{{$value->username}}</td>
-                            <td>{{$value->level}}</td>
+                            <td>{{Str::title($value->name)}}</td>
+                            <td>{{Str::title($value->username)}}</td>
+                            <td>{{Str::title($value->level)}}</td>
                             <td>{{$value->telepon}}</td>
                             <td>
                                 <form action="{{ route('datamasyarakat.destroy', $value->id) }}" method="POST">

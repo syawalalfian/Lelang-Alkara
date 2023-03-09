@@ -32,16 +32,16 @@
                         @forelse ($usersadmin as $value)
                          <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{$value->name}}</td>
-                            <td>{{$value->username}}</td>
-                            <td>{{$value->level}}</td>
+                            <td>{{Str::title($value->name)}}</td>
+                            <td>{{Str::title($value->username)}}</td>
+                            <td>{{Str::title($value->level)}}</td>
                             <td>{{$value->telepon}}</td>
                             <td>
                                 <form action="{{ route('dataadmin.destroy', $value->id) }}" method="POST">
                                   <a href="{{ route('petugas.show', $value->id) }}" class="btn btn-info btn-sm">
                                 <i class="bi bi-info-square"></i>Show
                                 </a>
-                                <a href="{{route('dataadmin.create')}}" class="btn btn-warning btn-sm">
+                                <a href="{{route('petugas.edit', $value->id)}}" class="btn btn-warning btn-sm">
                                 <i class="bi bi-pencil-square"></i>Edit
                                 </a>
                                 @csrf

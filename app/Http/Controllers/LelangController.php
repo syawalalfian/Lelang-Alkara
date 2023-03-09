@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\lelang;
 use App\Models\Barang;
+use App\Models\User;
 use App\Models\history_lelang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LelangController extends Controller
 {
@@ -70,11 +72,13 @@ class LelangController extends Controller
         $lelang->barangs_id = $request->barangs_id;
         $lelang->tanggal_lelang = $request->tanggal_lelang;
         $lelang->harga_akhir = '0';
+        $lelang->pemenang = 'Belum Ada';
         $lelang->users_id = Auth::user()->id;
-        $lelang->status = 'dibuka';
+        $lelang->status = 'tutup';
         $lelang->save();
 
-        return redirect()->route('lelang.index')->with('toast_success', 'Data Berhasil Ditambahkan');   
+        Alert::toast('Barang Lelang Berhasil Ditambahkan','success')->timerProgressBar()->autoClose(3000);
+        return redirect()->route('lelang.index');   
     }
 
     /**
@@ -98,9 +102,13 @@ class LelangController extends Controller
      * @param  \App\Models\lelang  $lelang
      * @return \Illuminate\Http\Response
      */
-    public function edit(lelang $lelang)
+    public function edit(lelang $lelang, User $user)
     {
         //
+         $lelangs = Lelang::find($lelang->id);
+         $users = User::find($user->id);
+         $historyLelangs = History_lelang::orderBy('harga', 'desc')->get()->where('lelang_id', $lelang->id);
+        return view('lelang.edit', compact('lelangs', 'historyLelangs'));
     }
 
     /**
@@ -113,6 +121,21 @@ class LelangController extends Controller
     public function update(Request $request, lelang $lelang)
     {
         //
+        $request->validate([
+            'status' => 'required'
+        ]
+    );
+
+    
+        $lelang= Lelang::find($lelang->id);
+        $lelang->status = $request->status;
+        $lelang->update();
+
+            Alert::toast('Status Lelang Berhasil DiUbah','success')->timerProgressBar()->autoClose(3000);
+            
+        return redirect()->route('lelang.index');
+
+
     }
 
     /**

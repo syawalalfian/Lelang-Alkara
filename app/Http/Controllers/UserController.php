@@ -173,10 +173,48 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
         //
+         $rules = $request->validate([
+            'level' => 'required',
+            'telepon' => 'required|max:15',
+        ],
+        [
+            'name.required' => 'Nama tidak boleh kosong',
+            'name.unique' => 'Nama sudah terdaftar',
+            'name.min' => 'Nama terlalu pendek',
+            'username.required' => 'Username tidak boleh kosong',
+            'level.required' => 'Level tidak boleh kosong',
+            'username.unique' => 'Username sudah terdaftar',
+            'username.max' => 'Username terlalu panjang',
+            'telepon.max' => 'No telp terlalu panjang',
+            'telepon.required' => 'No telp tidak boleh kosong',
+        ]
+    
+    );
+        if($request->name != $user->name) {
+            $rules['name'] = 'required|unique:users,name|min:3|max:50';
+        }
+        elseif($request->username != $user->username) {
+            $rules['name'] = 'required|unique:users,username|max:15';
+        }
+
+        $users = User::find($user->id);
+        $users->name = $request->name;
+        $users->username = $request->username;
+        $users->level = $request->level;
+        $users->telepon = $request->telepon;
+        $users->update(); 
+
+        if($user->level == 'admin'){
+            return redirect()->route('dataadmin.index')->with('editsuccess','Data Akun Berhasil Diedit');
+        }elseif($user->level == 'petugas'){
+             return redirect()->route('petugas.index')->with('editsuccess','Data Akun Berhasil Diedit');
+        }
+        
     }
+    
 
     /**
      * Remove the specified resource from storage.

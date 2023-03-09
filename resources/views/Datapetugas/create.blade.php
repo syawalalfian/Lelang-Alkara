@@ -15,7 +15,7 @@
                                             <label class="col-lg-4 col-form-label" for="name">Name <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" value="{{old('name')}}" class="form-control" id="name" name="name" placeholder="Enter a username..">
+                                                <input type="text" value="{{old('name')}}" class="form-control" id="name" name="name" placeholder="Masukan Nama..">
                                             </div>
                                         </div>
                                         @error('name')
@@ -28,7 +28,7 @@
                                             <label class="col-lg-4 col-form-label" for="username">Username <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" value="{{old('username')}}" class="form-control" id="username" name="username" placeholder="Your valid email..">
+                                                <input type="text" value="{{old('username')}}" class="form-control" id="username" name="username" placeholder="Username Anda..">
                                             </div>
                                         </div>
                                         @error('username')
@@ -41,7 +41,7 @@
                                             <label class="col-lg-4 col-form-label" for="password">Password <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" value="{{old('password')}}" class="form-control" id="password" name="password" placeholder="Choose a safe one..">
+                                                <input type="password" value="{{old('password')}}" class="form-control" id="password" name="password" placeholder="Masukan Password..">
                                             </div>
                                         </div>
                                         @error('password')
@@ -71,7 +71,7 @@
                                             <label class="col-lg-4 col-form-label" for="telepon">No Telephone <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" value="{{old('telepon')}}" class="form-control" id="telepon" name="telepon" placeholder="Masukan Nomor">
+                                                <input type="text" value="{{old('telepon')}}" class="form-control" id="telepon" name="telepon" placeholder="Masukan Nomor..">
                                             </div>
                                         </div>
                                         @error('telepon')

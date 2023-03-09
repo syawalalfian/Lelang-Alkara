@@ -38,11 +38,11 @@
                 @endif
 
                 @if(auth()->user()->level == 'admin')
-                <span class="ml-2 d-none d-lg-inline text-white small">Admin</span>
+                <span class="ml-2 d-none d-lg-inline text-white small">{{Str::upper(Auth ::user()->level)}}</span>
                 @elseif(auth()->user()->level == 'petugas')
-                <span class="ml-2 d-none d-lg-inline text-white small">Petugas</span>
+                <span class="ml-2 d-none d-lg-inline text-white small">{{Str::upper(Auth ::user()->level)}}</span>
                 @else(auth()->user()->level == 'masyarakat')
-                <span class="ml-2 d-none d-lg-inline text-white small">{{Auth ::user()->username}}</span>
+                <span class="ml-2 d-none d-lg-inline text-white small">{{Str::upper(Auth ::user()->username)}}</span>
                 @endif
 
               </a>

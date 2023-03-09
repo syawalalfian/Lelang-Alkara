@@ -52,7 +52,7 @@
                             
                         </tr>   
                         @empty
-                            
+                            Data Masih Kosong
                         @endforelse
                       
                     </tbody>

@@ -24,6 +24,7 @@
             <br>
             <br>
 <div class="row">
+  
             @forelse($lelangs as $lelang)
   
       

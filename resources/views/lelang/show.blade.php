@@ -14,6 +14,9 @@
         <div class="col-lg-7">
          <div class="card mb-5">
           <div class="card-body">
+
+             
+
             @if($lelangs->barang->image)
                 <img class="img-fluid mt-3" src="{{ asset('storage/' . $lelangs->barang->image)}}" alt="User profile picture">
                 @endif
@@ -24,7 +27,6 @@
         <div class="col-lg-5">
          <div class="card mb-4">
         <div class="card-body">
-                    
                         {{-- Nama Barang --}}
                        <div class="form-group mandatory">
                         <label  for="nama_barang">{{ __('Nama Barang') }}</label>
@@ -85,12 +87,68 @@
                                     {{ __('Kembali') }}
                                   </a>
                               </div>
-                              
                        </div>
                       </div>
                     </div> 
 
 </div>
+
+
+
+              
+              <div class="table-responsive">
+                  <table class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th>No</th>
+                        <th>Customer</th>
+                        <th>Nama Barang</th>
+                        <th>Harga Penawaran</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    @forelse ($historyLelangs as $item)
+                        <tbody>
+                      <tr>
+                         <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{Str::title($item->user->username)}}</td>
+                        <td>{{ $item->lelang->barang->nama_barang }}</td>
+                        <td>@currency($item->harga)</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('j-F-Y') }}</td>
+                        <td><span class="badge text-white {{ $item->status == 'pending' ? 'bg-warning' : ($item->status == 'gugur' ? 'bg-danger' : 'bg-success') }}">{{ Str::title($item->status) }}</span></td>
+                        {{-- <td><span class="badge text-white {{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span></td> --}}
+                        @if($item->status == 'pemenang')
+
+                          @elseif($item->status == 'gugur')
+
+                          @else($item->status == 'pending')
+                        <td>
+                          
+                          <form action="{{route('lelang.setpemenang', $item->id)}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit" class="btn btn-success btn-sm">
+                            PILIH PEMENANG <i class="fa fa-check ml-2" aria-hidden="true"></i>
+                            </button>
+                          </form>
+                        </td>
+                        @endif
+                        {{-- <td><span class="badge badge-danger">"{{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span></td> --}}
+                      </tr>
+                      </tr>
+                     
+                    </tbody>
+                    @empty
+                      
+                    @endforelse
+                    
+                  </table>
+                </div>
+            </div>
+            
 
 @endif
 @endsection

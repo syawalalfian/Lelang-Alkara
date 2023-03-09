@@ -36,7 +36,7 @@
                             <td><a href="{{route('lelangin.create', $item->lelang->id)}}">{{ $item->lelang->barang->nama_barang }}</a></td>
                             <td>@currency($item->harga)</td>
                             <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('j-F-Y') }}</td>
-                            <td> <span class="badge {{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span></td>
+                             <td><span class="badge text-white {{ $item->status == 'pending' ? 'bg-warning' : ($item->status == 'gugur' ? 'bg-danger' : 'bg-success') }}">{{ Str::title($item->status) }}</span></td>
                         </tr>   
                         @empty
 

@@ -114,10 +114,14 @@
               <div class="card col-md-12">
                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-primary">Data Pelelang {{$lelangs->barang->nama_barang}}</h6>
+                  
                   <div class="col-6 d-flex justify-content-end">
+                    @if($lelangs->status == 'dibuka')
                     <button type="submit" class="btn btn-primary me-1 mb-1" data-toggle="modal" data-target="#myModal"   >
                    {{ __('Tawar') }}
                     </button>
+                    @else($lelang->status == 'tutup')
+                    @endif
                   </div>
                   @include('modal')
                 </div>
@@ -143,7 +147,7 @@
                         <td>{{ $item->lelang->barang->nama_barang }}</td>
                         <td>@currency($item->harga)</td>
                         <td>{{ \Carbon\Carbon::parse($item->tanggal)->format('j-F-Y') }}</td>
-                        <td><span class="badge {{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span></td>
+                        <td><span class="badge text-white {{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span></td>
                         {{-- <td><span class="badge badge-danger">"{{ $item->status == 'pending' ? 'bg-warning' : 'bg-success' }}">{{ Str::title($item->status) }}</span></td> --}}
                       </tr>
                       </tr>
