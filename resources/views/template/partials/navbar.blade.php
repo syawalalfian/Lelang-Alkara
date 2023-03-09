@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
           <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
             <i class="fa fa-bars"></i>
@@ -23,6 +25,54 @@
                 </form>
               </div>
             </li>
+
+            @if(auth()->user()->level == 'masyarakat')
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                {{-- @php
+                    $count = 0;
+                  @endphp
+                   @foreach ($lelangs as $lelang)
+                   @if($lelang->pemenang == Auth::user()->name)
+                   @php
+                      $count++;
+                    @endphp
+                  @endif
+                @endforeach --}}
+                @php
+                  $count = \App\Models\Lelang::where('pemenang', Auth::user()->name)->count();
+                @endphp
+                <span class="badge badge-danger badge-counter">{{ $count }}</span>
+              </a>
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Pesan Masuk
+                </h6>
+                 {{-- @php
+                      $lelangs = \App\Models\lelang::take(2)->get();
+                    @endphp --}}
+                    @foreach (\App\Models\lelang::all() as $lelangs)
+                    @if($lelangs->pemenang == Auth::user()->name)
+                <div class="dropdown-item d-flex align-items-center" href="#">
+                      <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                          <i class="fas fa-file-alt text-white"></i>
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <div class="small text-gray-500">{{ $lelangs->created_at->format('F d, Y') }}</div>
+                        <span class="font-weight-bold">Selamat Anda Memenangkan <a href="{{ route('lelangin.create', $lelangs->barang->id) }}" class="text-primary">{{ $lelangs->barang->nama_barang }}</a></span>
+                      </div>
+                    </div>
+
+                @endif
+                 @endforeach
+              </div>
+            </li>
+            @endif
             
             
            

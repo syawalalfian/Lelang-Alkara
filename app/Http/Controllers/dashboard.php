@@ -8,6 +8,7 @@ use App\Models\lelang;
 use App\Models\history_lelang;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class dashboard extends Controller
 {
@@ -45,7 +46,19 @@ class dashboard extends Controller
         // dd ($barangs);
         $barangs = barang::all();
         $lelangs = lelang::all()->where('status', 'dibuka');
-        return view('dashboard.masyarakat', compact('lelangs'));
+
+        $userId = auth()->user()->id; // Mendapatkan ID user yang sedang login
+        $isWinner = false;
+        foreach ($lelangs as $lelang) {
+        if ($lelang->pemenang == $userId) {
+            $isWinner = true;
+            break;
+        }
+    }
+
+        return view('dashboard.masyarakat', compact('lelangs', 'isWinner'));
+
+        
     }
 
     

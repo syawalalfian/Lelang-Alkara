@@ -29,6 +29,11 @@ class LelangController extends Controller
         return view('lelang.index', compact('lelangs','barangs'));
     }
 
+    public function datanavbar(){
+        $lelangs = Lelang::all();
+        return view ('template.partials.navbar', compact('lelangs'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
