@@ -27,7 +27,7 @@ class LaporanController extends Controller
     $historylelangs = history_lelang::orderBy('harga', 'desc')->get();
     $pdf = PDF  ::loadView('laporan.cetaklaporan', ['cetakhistory' => $historylelangs]);
     $pdf->setPaper('A4', 'potrait');
-    return $pdf->download('laporan_datapenawaran.pdf');
+    return $pdf->stream('laporan_datapenawaran.pdf');
 }   
 
 }

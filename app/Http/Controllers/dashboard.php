@@ -47,16 +47,7 @@ class dashboard extends Controller
         $barangs = barang::all();
         $lelangs = lelang::all()->where('status', 'dibuka');
 
-        $userId = auth()->user()->id; // Mendapatkan ID user yang sedang login
-        $isWinner = false;
-        foreach ($lelangs as $lelang) {
-        if ($lelang->pemenang == $userId) {
-            $isWinner = true;
-            break;
-        }
-    }
-
-        return view('dashboard.masyarakat', compact('lelangs', 'isWinner'));
+        return view('dashboard.masyarakat', compact('lelangs'));
 
         
     }

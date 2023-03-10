@@ -17,6 +17,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "maatwebsite/excel": "^1.1",
+        "nesbot/carbon": "^2.66",
         "realrashid/sweet-alert": "^5.1"
     },
     "require-dev": {

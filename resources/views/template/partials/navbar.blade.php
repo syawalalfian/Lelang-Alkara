@@ -63,7 +63,7 @@
                         </div>
                       </div>
                       <div class="flex-grow-1">
-                        <div class="small text-gray-500">{{ $lelangs->created_at->format('F d, Y') }}</div>
+                        <div class="small text-gray-500">{{ $lelangs->created_at->diffForHumans() }}</div>
                         <span class="font-weight-bold">Selamat Anda Memenangkan <a href="{{ route('lelangin.create', $lelangs->barang->id) }}" class="text-primary">{{ $lelangs->barang->nama_barang }}</a></span>
                       </div>
                     </div>
